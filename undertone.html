@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow Match</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #fbf4f1;
+    color: #493b3d;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    min-height: 100vh;
+    margin: auto;
+    background: #fffaf8;
+    padding: 20px 30px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0 18px;
+    border-bottom: 1px solid #f0e2df;
+}
+
+.logo {
+    color: #98576b;
+    font-size: 21px;
+    font-family: Georgia, serif;
+    font-weight: bold;
+}
+
+.more {
+    color: #806c70;
+    font-size: 20px;
+}
+
+.progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 28px 10px 35px;
+    position: relative;
+}
+
+.progress::before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: #ead8dc;
+    top: 50%;
+    right: 0;
+    left: 0;
+}
+
+.step {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: #eee1e3;
+    border: 1px solid #cbb6bb;
+    z-index: 1;
+}
+
+.step.active {
+    background: #9c5369;
+    border-color: #9c5369;
+}
+
+h2 {
+    text-align: center;
+    font-size: 23px;
+    margin-bottom: 35px;
+    color: #403336;
+}
+
+.section {
+    margin-bottom: 38px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 15px;
+}
+
+.option {
+    text-align: center;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 15px;
+    transition: 0.2s;
+}
+
+.circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: auto;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.option p {
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+.option.selected .circle {
+    border: 3px solid #98576b;
+    outline: 3px solid #eedce1;
+}
+
+.option.selected p {
+    color: #98576b;
+    font-weight: bold;
+}
+
+.light {
+    background: #f1d2bd;
+}
+
+.medium {
+    background: #d9ad89;
+}
+
+.dark {
+    background: #a77957;
+}
+
+.warm {
+    background: #e5b86c;
+}
+
+.warm::after {
+    content: "✳";
+    color: #b27b31;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+    line-height: 44px;
+}
+
+.cool {
+    background: #ddaabd;
+}
+
+.neutral {
+    background: #d9c8bd;
+}
+
+.neutral::after {
+    content: "✳";
+    color: #b49b8c;
+    font-size: 20px;
+    display: block;
+    text-align: center;
+    line-height: 44px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 65px;
+}
+
+.back {
+    color: #986174;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.next {
+    background: #a6536e;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 38px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.next:hover {
+    background: #874459;
+}
+
+@media(max-width: 450px) {
+    .container {
+        padding: 18px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .circle {
+        width: 43px;
+        height: 43px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">Glow Match</div>
+        <div class="more">···</div>
+    </div>
+
+    <div class="progress">
+        <span class="step active"></span>
+        <span class="step active"></span>
+        <span class="step active"></span>
+        <span class="step"></span>
+    </div>
+
+    <h2>لون بشرتك والأندرتون</h2>
+
+    <div class="section">
+
+        <div class="section-title">درجة لون البشرة</div>
+
+        <div class="options">
+
+            <div class="option" onclick="selectOption(this,'skin','فاتحة')">
+                <div class="circle light"></div>
+                <p>فاتحة</p>
+            </div>
+
+            <div class="option" onclick="selectOption(this,'skin','متوسطة')">
+                <div class="circle medium"></div>
+                <p>متوسطة</p>
+            </div>
+
+            <div class="option" onclick="selectOption(this,'skin','سمراء')">
+                <div class="circle dark"></div>
+                <p>سمراء</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">الأندرتون</div>
+
+        <div class="options">
+
+            <div class="option" onclick="selectOption(this,'undertone','دافئ')">
+                <div class="circle warm"></div>
+                <p>دافئ</p>
+            </div>
+
+            <div class="option" onclick="selectOption(this,'undertone','بارد')">
+                <div class="circle cool"></div>
+                <p>بارد</p>
+            </div>
+
+            <div class="option" onclick="selectOption(this,'undertone','محايد')">
+                <div class="circle neutral"></div>
+                <p>محايد</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="buttons">
+
+        <a href="skin.html" class="back">← رجوع</a>
+
+        <button class="next" onclick="goNext()">
+            التالي ←
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let selectedSkin = "";
+let selectedUndertone = "";
+
+function selectOption(element, type, value) {
+
+    let parent = element.parentElement;
+
+    parent.querySelectorAll('.option').forEach(option => {
+        option.classList.remove('selected');
+    });
+
+    element.classList.add('selected');
+
+    if (type === 'skin') {
+        selectedSkin = value;
+    }
+
+    if (type === 'undertone') {
+        selectedUndertone = value;
+    }
+}
+
+function goNext() {
+
+    if (!selectedSkin || !selectedUndertone) {
+        alert("فضلاً اختاري درجة البشرة والأندرتون أولاً");
+        return;
+    }
+
+    localStorage.setItem("skinTone", selectedSkin);
+    localStorage.setItem("undertone", selectedUndertone);
+
+    window.location.href = "results.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<style>
+    body {
+        background-color: #fff5f3;
+        font-family: Arial, sans-serif;
+        color: #754653;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #a65e73;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .card {
+        background-color: white;
+        border: 1px solid #efd5d9;
+        border-radius: 15px;
+        padding: 25px 10px;
+        width: 130px;
+        cursor: pointer;
+    }
+
+    .card:hover {
+        background-color: #f6e1e5;
+    }
+
+    .card.selected {
+        background-color: #f3dce2;
+        border: 2px solid #a65e73;
+    }
+
+    .icon {
+        font-size: 30px;
+    }
+
+    button {
+        background-color: #a65e73;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 12px 35px;
+        font-size: 16px;
+        margin-top: 30px;
+        cursor: pointer;
+    }
+
+    #message {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+</style>
+<h2>Glow Match ✦</h2>
+
+<h3>ما نوع بشرتك؟</h3>
+
+<p>اختاري نوع بشرتك لنساعدك في العثور على منتجات المكياج المناسبة لكِ.</p>
+
+<div class="cards">
+
+    <div class="card" onclick="chooseSkin(this, 'جافة')">
+        <div class="icon">💧</div>
+        <h3>بشرة جافة</h3>
+    </div>
+
+    <div class="card" onclick="chooseSkin(this, 'دهنية')">
+        <div class="icon">✨</div>
+        <h3>بشرة دهنية</h3>
+    </div>
+
+    <div class="card" onclick="chooseSkin(this, 'عادية')">
+        <div class="icon">🌸</div>
+        <h3>بشرة عادية</h3>
+    </div>
+
+    <div class="card" onclick="chooseSkin(this, 'مختلطة')">
+        <div class="icon">🌿</div>
+        <h3>بشرة مختلطة</h3>
+    </div>
+
+</div>
+
+<p id="message"></p>
+
+<button onclick="nextPage()">التالي ←</button>
+
+<script>
+    let skinType = "";
+
+    function chooseSkin(card, type) {
+        skinType = type;
+
+        document.querySelectorAll(".card").forEach(function(item) {
+            item.classList.remove("selected");
+        });
+
+        card.classList.add("selected");
+
+        document.getElementById("message").innerText =
+            "اخترتِ البشرة " + type;
+    }
+
+    function nextPage() {
+        if (skinType === "") {
+            alert("اختاري نوع بشرتك أولاً");
+        } else {
+            window.location.href =
+                "undertone.html?skin=" + encodeURIComponent(skinType);
+        }
+    }
+</script>
